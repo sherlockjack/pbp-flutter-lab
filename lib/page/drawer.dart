@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
+import '../main.dart';
 import 'form.dart';
 import 'data.dart';
+import 'mywatchlist.dart';
 
 class DrawerReiou extends StatelessWidget {
   const DrawerReiou(
@@ -53,6 +54,19 @@ class DrawerReiou extends StatelessWidget {
                     tambahBudget: tambahBudget,
                   ),
                 ),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('MyWatchList'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MyWatchListPage(
+                          Blist: Blist,
+                          tambahBudget: tambahBudget,
+                        )),
               );
             },
           ),

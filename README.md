@@ -1,48 +1,45 @@
-## Navigator.push dan Navigator.pushReplacement
-Navigator.push melakukan navigasi ke suatu halaman memakai push
-Navigator.pushReplacement sama tapi sebelum push harus pop terlebih dahulu
+## Pengambilan Data JSON tanpa Membuat Model
 
----
+Function `jsonDecode` dipanggil untuk mengembalikan object `Map<String,dynamic>`, kemudian  diakses seperti map.
+Pengambilan cara ini tidak terlalu disarankan, tipe datanya tidak diketahui jadi rentan kenak runtime.
 
-## Widget yang Digunakan
-formPage: Widget kostum halaman form
-form: Widget untuk membuat form
-DropdownButtonFormField: Isian form yang menerima 1 pilihan DropdownMenuItem
-TextFormField: Untuk menerima input karakter
-TextButton: Tombol Text
-ListView: Looping object untuk dipetakan kedalam list
-dataPage: stateless yang menampilkan halaman penyajian data
-Card: Layout kartu
-DrawerReiou: kostum untuk membuat drawer
-Drawer: Membuat tombol hamburger
+## Widget Baru yang Digunakan
+1.FutureBuilder: build widget dengan dapat data asynchronous function
+2.CircularProgressIndicator:  icon loading selama aplikasi mengambil data
+3.RichText: Pawang TextSpan
+4.InkWell: layout yang memiliki touch response
+5.TextSpan: menampung text dengan style berbeda
+6.ElevatedButton: tombol yang muncul ketika ditekan
 
----
+## Mekanisme Pengambilan Data JSON
+Widget `futurebuilder` manggil function `fetchToDo` yang sudah dibuat.<br />
+Function bakal mengambil data dari endpoint Tugas3, lalu membuat instance model ke data dan memasukkan kedalam list <br />
+Kalau data belum didapatkan `CircularProgressIndicator` akan menampilkan icon loading.<br />
+Kalau sudah data akan menampilkan sesuai yang kita inginkan
 
-## Event Flutter
-onTap: menekan widget baru aktif (Selain tombol)
-onPressed : sama kayak onTap tapi biasanya tombol
-onSaved : untuk mengumpulkan form
-onChanged: User mengganti nilai form
 
----
-## Cara Kerja Navigator
-Menyimpan stack yang berisi object Route, nanti akan diarahkan ke path masing masing halaman.
-Operasinya ada  .push , .pop, .pushReplacament yang menjadi mixed dari push dan pop.
+## Implementasi
 
----
-## Implementasi Tugas 8
-
->Memperbaiki kode yang dari minggu lalu
->Membuat class BudgetData
->Membuat List kosong Blist
->Membuat fungsi tambahBudget, yang menambahkan object BudgetData ke Blist
->membuat file data.dart,drawer.dart,form.dart
->Membuat statefulWidget formPage yang menerima Blist dan tambahBudget
->Mengisi state statenya 
->Membangun tampilan FormPage
->sama seperti formPage cuma kali ini dataPage
->Membangun tampilan dataPage
->Membuat Drawer yang menerima Blist dan tambahBudget di inisasi
->Membangun tampilan Drawer
->Memanggil Drawer di file lainnya
->Menangis karena bikinnya sambil sakit :')
+> Ngebuat `mywatchlist.dart` <br />
+> Ngebuat `/model/modeldatawatch.dart`<br />
+> Menjalankan `flutter pub add http`<br />
+> di File `android/app/src/main/AndroidManifest.xml` menjalankan <br />
+```
+...
+    <application>
+    ...
+    </application>
+    <!-- Required to fetch data from the Internet. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+...
+```
+> Menyalin data dari endpoint tugas3 ke situs QuickType <br>
+> menempel ke modeldatawatchlist.dart dan melakukan beberapa perubahan<br>
+> Menjalankan code flutter pub add http<br>
+> menambahkan import, dan membuat state yang berisi function yang mengambil data Json di MyWatchListPage <br>
+> Menambahkan stateless yang menerima detail film  di watchId <br>
+> Membuat tampilan untuk bisa melihat list judul film yang dipetakan
+> Membuat tampilan untuk bisa mendaftarkan film
+> Membuat onpress biar bisa dinavigasi ke mywatchlistid.dart ketika ditekan
+> Di drawer ga lupa untuk membuat ListTile biar bisa ternavigasi ke MyWatchListPage
+> Menangis

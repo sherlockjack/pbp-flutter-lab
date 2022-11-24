@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'main.dart';
+import '../main.dart';
 import 'drawer.dart';
 
 class formPage extends StatefulWidget {
